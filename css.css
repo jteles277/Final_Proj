@@ -1,3 +1,15 @@
+
+.body{
+    position:relative;
+    z-index:0;
+}
+.container-fluid{
+    margin-bottom: 1000px;
+    height: 400px;
+}
+.slide{
+    height:500px;
+}
 .carousel-indicators {
     top: 0px;
     
@@ -10,7 +22,25 @@
   .vid{
 
     height: 131px;
+    
+    
   }
+  .Int{
+    max-width:1000px;
+    max-height:1000px;
+    
+    
+    
+  }
+  .Int:hover{
+    
+    position:relative;
+    z-index:1000;
+    max-width:1000px;
+    max-height:1000px;
+    min-width: 300px;
+    min-height: 700px;
+}
   
   
   
