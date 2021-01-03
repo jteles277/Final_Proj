@@ -4,7 +4,7 @@
     z-index:0;
 }
 .container-fluid{
-    margin-bottom: 1000px;
+    margin-bottom: 100px;
     height: 400px;
 }
 .slide{
@@ -29,17 +29,16 @@
     max-width:1000px;
     max-height:1000px;
     
-    
+    transition: 1s;
     
   }
   .Int:hover{
-    
+    background-color: darkgrey;
     position:relative;
     z-index:1000;
     max-width:1000px;
     max-height:1000px;
-    min-width: 300px;
-    min-height: 700px;
+    transform: scale(1.5);
 }
   
   
