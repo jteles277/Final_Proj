@@ -64,7 +64,11 @@
     max-height:1000px;
     transform: scale(1.7,1.1);
 }
-
+.Cat{
+  padding-top: 100px;
+  padding-left: 10%;
+  position: absolute;
+}
 .Empt{
   width: 50%;
   float: left;
