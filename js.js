@@ -43,6 +43,8 @@ function create_image(category) {
     for (i = 0; i < Math.min(title.Titles.length, 10); i++) {
       var _name = title.Titles[i].Name;
 
+console.log(_name);
+
       //Gets the image
       ajaxHelper('https://api.themoviedb.org/3/search/movie?api_key=0bc1da750e2a1eee63910ae9652e526f&query=' + _name + '&page=1', 'GET').done(function (search) {
 
@@ -53,7 +55,9 @@ function create_image(category) {
         var titleImg = document.createElement("img");
         titleImg.src = img_path;
         titleImg.alt = _name;
+
         inner_list.appendChild(titleImg);
+
         }
       });
     }
