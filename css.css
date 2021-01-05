@@ -62,7 +62,7 @@
     z-index:1000;
     max-width:1000px;
     max-height:1000px;
-    transform: scale(1.7,1.1);
+    transform: scale(2.2,1.1);
 }
 .Cat{
   padding-top: 100px;
@@ -86,11 +86,34 @@ ul{
   background-color: none;
   float: right;
   color: aliceblue;
-  text-align: left;
+  text-align: left !important;
   padding: 0px;
-  font-size:xx-small;
+  
   padding-top: 20%;
+  
+  
 
+
+  font-size: medium;
+
+}
+.Int:hover .Inf ul{
+ 
+  width:160px;
+  transform: translate(-30%, -10%);
+ 
+  
+
+  
+}
+.Int:hover .Inf li{
+ 
+  
+  transform: scale(0.45,0.9);
+
+  
+
+  
 }
 
 .button{
@@ -107,7 +130,7 @@ ul{
 }
 .Int:hover .Inf li{
 
-  padding-bottom: 25%;
+  padding-bottom: 5%;
   padding-left: 10%;
 
 }
