@@ -80,6 +80,7 @@ ul{
 }
 
 .Int:hover .Inf{
+  transition: 2s;
   visibility: visible;
   width: 50%;
   height: 100%;
