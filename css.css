@@ -101,7 +101,7 @@ ul{
  
   width:160px;
   transform: translate(-30%, -10%);
- 
+  margin-bottom: 0px;
   
 
   
@@ -121,10 +121,7 @@ ul{
 }
 .Int:hover .Inf button{
   
-  margin-left: 50%;
-  margin-top: 100px;
   
-  padding: 10%;
   
 
 }
@@ -150,7 +147,36 @@ ul{
   height: 100%;
   z-index:1001;
 }
+
+
+.poster{
+  width: 50%;
+  height: 100px;
+  float: left;
+
+  background-image: url('images/poster.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+
+.Inf2{
+  visibility: visible;
+  width: 50%;
+  height: 100%;
+  background-color: none;
+  float: right;
+  
+  text-align: left !important;
+  padding: 0px;
+  
+  padding-top: 0%;
   
   
-  
- 
+
+
+  font-size: medium;
+
+}
