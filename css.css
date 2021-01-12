@@ -62,7 +62,7 @@
     z-index:1000;
     max-width:1000px;
     max-height:1000px;
-    transform: scale(1.7,1.1);
+    transform: scale(2.2,1.1);
 }
 .Cat{
   padding-top: 100px;
@@ -80,17 +80,41 @@ ul{
 }
 
 .Int:hover .Inf{
+  transition: 2s;
   visibility: visible;
   width: 50%;
   height: 100%;
   background-color: none;
   float: right;
   color: aliceblue;
-  text-align: left;
+  text-align: left !important;
   padding: 0px;
-  font-size:xx-small;
+  
   padding-top: 20%;
+  
+  
 
+
+  font-size: medium;
+
+}
+.Int:hover .Inf ul{
+ 
+  width:160px;
+  transform: translate(-30%, -10%);
+  margin-bottom: 0px;
+  
+
+  
+}
+.Int:hover .Inf li{
+ 
+  
+  transform: scale(0.45,0.9);
+
+  
+
+  
 }
 
 .button{
@@ -98,16 +122,13 @@ ul{
 }
 .Int:hover .Inf button{
   
-  margin-left: 50%;
-  margin-top: 100px;
   
-  padding: 10%;
   
 
 }
 .Int:hover .Inf li{
 
-  padding-bottom: 25%;
+  padding-bottom: 5%;
   padding-left: 10%;
 
 }
@@ -127,7 +148,36 @@ ul{
   height: 100%;
   z-index:1001;
 }
+
+
+.poster{
+  width: 50%;
+  height: 100px;
+  float: left;
+
+  background-image: url('images/poster.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+
+.Inf2{
+  visibility: visible;
+  width: 50%;
+  height: 100%;
+  background-color: none;
+  float: right;
+  
+  text-align: left !important;
+  padding: 0px;
+  
+  padding-top: 0%;
   
   
-  
- 
+
+
+  font-size: medium;
+
+}
