@@ -31,20 +31,21 @@ function create_image(category) {
     var composedUri = categoriesUri + "/" + category.Id;
     ajaxHelper(composedUri, 'GET').done(function (title) {
         //Loops through each title in a given category and creates an image.
-        for (i = 0; i < Math.min(title.Titles.length, 6); i++) {
+        for (i = 0; i < 6; i++) {
             var _name = title.Titles[i].Name;
             var _duration = title.Titles[i].Duration;
 
             //console.log(_name);
 
             var div0 = document.createElement("div");
-            div0.className = "col-md-2";
+            div0.className = "col-md-2 peepee";
             div0.style = "padding-left: 0px;";
 
             var div1 = document.createElement("div");
             div1.className = "vid row text-center";
             
             var div2 = document.createElement("div");
+            div2.id = _name;
             div2.className = "Int col-md-11 offset-1 xpto";
             div2.style = "word-wrap: break-word;";
 
@@ -91,20 +92,15 @@ function create_image(category) {
                     var img_path = secure_base_url + '/w500' + search.results[0].poster_path;
                     console.log(img_path);
 
-                    div2.style.background_image = "url('"+img_path+"')";
-                    $(".xpto").css({"background-image": "url('"+img_path+"')"});
+                    div2.style.background_image = "https://image.tmdb.org/t/p//w500/vES8WAzjowrMT8gwnoEaCioZXXk.jpg";
+
+                    $(".peepee").css({"background-image": "url('"+img_path+"')"});
+
                     div2.alt = _name;
         }
       });
     }
   });
-
-  //Makes the category label and the titles list child of the outer list.
-  outer_list.appendChild(label);
-  outer_list.appendChild(inner_list);
-
-  //Makes the outer list, that holds everything, a child of the div that holds all the categories.
-  parentDiv.appendChild(outer_list);
 }
 
 //--- GET TITLES
