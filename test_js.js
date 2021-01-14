@@ -53,7 +53,7 @@ async function CreateCategories(category) {
 
   var carousel = document.createElement("div");
     carousel.id = _name;
-    carousel.style = "padding-top: 5%;";
+    carousel.style = "padding-bottom: 5%;";
 
     var title = document.createElement("h2");
     title.className = "CategoryTitle";
