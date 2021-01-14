@@ -5,7 +5,7 @@ var secure_base_url = '';
 
 $(document).ready(async function () {
   console.log("Hello world!");
-  
+
   //Gets the secure base url
   await ajaxHelper('https://api.themoviedb.org/3/configuration?api_key=0bc1da750e2a1eee63910ae9652e526f', 'GET').done(function (result) {
     secure_base_url = result.images.secure_base_url;
@@ -17,7 +17,10 @@ $(document).ready(async function () {
   console.log(categories);
 
   //This is for creating multiple categories
-  categories.forEach(element => CreateCategories(element));
+  for (i = 0; i < categories.length; i++) {
+    console.log("TIME TO "+categories[i].Name);
+    //await CreateCategories(categories[i]);
+  }
   //CreateCategories(categories[0]);
 
   //This handles the navbar hide
@@ -30,7 +33,7 @@ $(document).ready(async function () {
     } else {
       opacity = 1;
     }
-    $(".header").css("background-color"," rgba(0,0,0,"+ opacity+")");
+    $(".header").css("background-color", " rgba(0,0,0," + opacity + ")");
   });
 
 });
@@ -48,34 +51,36 @@ async function GetCategories() {
 async function CreateCategories(category) {
 
   var titles_to_display = await GetAvailableTitlesFromCategory(category);
+  if (titles_to_display.length == 0)
+    return;
 
   _name = category.Name;
 
   var carousel = document.createElement("div");
-    carousel.id = _name;
-    carousel.style = "padding-bottom: 5%;";
+  carousel.id = _name;
+  carousel.style = "padding-bottom: 5%;";
 
-    var title = document.createElement("h2");
-    title.className = "CategoryTitle";
-    title.innerHTML = _name;
+  var title = document.createElement("h2");
+  title.className = "CategoryTitle";
+  title.innerHTML = _name;
 
-    var page = document.createElement("div");
-    page.className = "multiple-items";
+  var page = document.createElement("div");
+  page.className = "multiple-items";
 
-    //Folhas container
-    for (i = 0; i < titles_to_display.length; i++) {
-        CreateItem(titles_to_display[i], page);
-    }
+  //Folhas container
+  for (i = 0; i < titles_to_display.length; i++) {
+    CreateItem(titles_to_display[i], page);
+  }
 
-    carousel.appendChild(title);
-    carousel.appendChild(page);
-    parentDiv.appendChild(carousel);
+  carousel.appendChild(title);
+  carousel.appendChild(page);
+  parentDiv.appendChild(carousel);
 
-    $('.multiple-items').not('.slick-initialized').slick({
-        infinite: true,
-        slidesToShow: 6,
-        slidesToScroll: 6
-    });
+  $('.multiple-items').not('.slick-initialized').slick({
+    infinite: true,
+    slidesToShow: 6,
+    slidesToScroll: 6
+  });
 }
 
 class TitlePlusPoster {
@@ -87,15 +92,23 @@ class TitlePlusPoster {
 
 async function GetAvailableTitlesFromCategory(category) {
   console.log('Getting titles from category...');
+  console.log(category.Name + "-----------------------------------------------");
 
   var composedUri = categoriesUri + "/" + category.Id;
 
-  _ajax = await ajaxHelper(composedUri, 'GET');
-
   var titles_list = [];
+
+  try {
+    var _ajax = await ajaxHelper(composedUri, 'GET');
+  }
+  catch {
+    return titles_list;
+  }
+
 
   for (i = 0; i < Math.min(_ajax.Titles.length, 30); i++) {
 
+    console.log(_ajax.Titles[i]);
     var title = _ajax.Titles[i];
 
     //If the name contains ?, skip it
@@ -110,29 +123,32 @@ async function GetAvailableTitlesFromCategory(category) {
     var hasImage = true;
     var img_path = "n/a";
 
-    await ajaxHelper(imageUri + title.Name + '&language=en-US&page=1', 'GET').done(function (search) {
+    try{
+      var search = await ajaxHelper(imageUri + title.Name + '&language=en-US&page=1', 'GET');
+    }
+    catch{
+      continue;
+    }
 
-      console.log(search.results[0]);
-
-      //If there are no results, skip it
-      if (search === undefined || search.results.length === 0) {
+    //If there are no results, skip it
+    if (search === undefined || search.results.length === 0) {
+      hasImage = false;
+    }
+    else {
+      //If the result doesnt contain the name, skip it.
+      if ((!search.results[0].title.includes(title.Name))) {
         hasImage = false;
       }
       else {
-        //If the result doesnt contain the name, skip it.
-        if ((!search.results[0].title.includes(title.Name))) {
+        //If the image is null, skip it.
+        if (search.results[0].poster_path === null)
           hasImage = false;
-        }
-        else {
-          //If the image is null, skip it.
-          if (search.results[0].poster_path === null)
-            hasImage = false;
-          else
-            //Finally, gets the image path
-            img_path = secure_base_url + '/w500' + search.results[0].poster_path;
-        }
+        else
+          //Finally, gets the image path
+          img_path = secure_base_url + '/w500' + search.results[0].poster_path;
       }
-    });
+    }
+
 
     if (!hasImage)
       continue;
@@ -148,27 +164,27 @@ async function GetAvailableTitlesFromCategory(category) {
 function CreateItem(title, _parentDiv) {
   //Creates all the titles labels
   //Loops through each title in a given category and creates an image.
-    var _name = title.title.Name;
-    var _duration = title.title.Duration;
+  var _name = title.title.Name;
+  var _duration = title.title.Duration;
 
-    var itemDiv = document.createElement("div");
-    itemDiv.className = "item";
+  var itemDiv = document.createElement("div");
+  itemDiv.className = "item";
 
-    var _img = document.createElement("img");
-    _img.src = title.poster;
-    _img.alt = _name;
+  var _img = document.createElement("img");
+  _img.src = title.poster;
+  _img.alt = _name;
 
-    var _itemDesc = document.createElement("div");
-    _itemDesc.className = "itemDesc";
+  var _itemDesc = document.createElement("div");
+  _itemDesc.className = "itemDesc";
 
-    var _title = document.createElement("h4");
-    _title.className = "FilmTitle";
-    _title.innerHTML = _name;
+  var _title = document.createElement("h4");
+  _title.className = "FilmTitle";
+  _title.innerHTML = _name;
 
-    _itemDesc.appendChild(_title);
-    itemDiv.appendChild(_itemDesc);
-    itemDiv.appendChild(_img);
-    _parentDiv.appendChild(itemDiv);
+  _itemDesc.appendChild(_title);
+  itemDiv.appendChild(_itemDesc);
+  itemDiv.appendChild(_img);
+  _parentDiv.appendChild(itemDiv);
 }
 
 //--- GET TITLES
@@ -181,13 +197,13 @@ function GetTitlesByCategory(id, name) {
   });
 }
 
-  //--- GET IMAGE
-  function GetImageByID(id) {
-    //console.log('Getting titles of the category '+name+'...');
-    ajaxHelper('https://api.themoviedb.org/3/movie/'+id+'/images?api_key=0bc1da750e2a1eee63910ae9652e526f', 'GET').done(function (img) {
-      console.log("IMG "+img)
-    });
-  }
+//--- GET IMAGE
+function GetImageByID(id) {
+  //console.log('Getting titles of the category '+name+'...');
+  ajaxHelper('https://api.themoviedb.org/3/movie/' + id + '/images?api_key=0bc1da750e2a1eee63910ae9652e526f', 'GET').done(function (img) {
+    console.log("IMG " + img)
+  });
+}
 
 //--- GET ID
 function GetTitleID(title) {
@@ -210,7 +226,7 @@ function ajaxHelper(uri, method, data) {
     contentType: 'application/json',
     data: data ? JSON.stringify(data) : null,
     error: function (jqXHR, textStatus, errorThrown) {
-      //console.log("AJAX Call[" + uri + "] Fail...");
+      console.log("AJAX Call[" + uri + "] Fail...");
     }
   });
 }
