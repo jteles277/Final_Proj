@@ -156,6 +156,8 @@ async function GetAvailableTitlesFromCategory(category) {
 
     await ajaxHelper(imageUri + title.Name + '&language=en-US&page=1', 'GET').done(function (search) {
 
+      console.log(search.results[0]);
+
       //If there are no results, skip it
       if (search === undefined || search.results.length === 0) {
         hasImage = false;
