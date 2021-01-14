@@ -3,21 +3,20 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Test</title>
+    <title>Home - Netflix</title>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/font-awesome.min.css" rel="stylesheet" />
     <link href="test_css.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick.css" />
-    <!-- <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick-theme.css"/> -->
+    <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick-theme.css"/>
 </head>
 
-<body style="background-color: black;">
+<body style="background-color: #141414;">
     <script src="Scripts/jquery-3.5.1.min.js"></script>
     <script src="Scripts/bootstrap.bundle.min.js"></script>
     <script src="Scripts/jquery-3.5.1.min.js"></script>
     <script src="slick-1.8.1/slick/slick.min.js"></script>
     <script src="test_js.js"></script>
-
     <!-- HEADER -->
     <div class="header sticky">
         <!-- Logo -->
@@ -35,97 +34,111 @@
         </div>
     </div>
 
-    <div style="width: 100vw; height: 75vh; ">
-        <video class ="videoAdd" autoplay muted loop>
-            <source src="bg.mp4" type="video/mp4">
-        </video>
-    </div>
-
-
-    <div id="parentDiv">
-        <div style="display: none;">
-            <h2 class="CategoryTitle">hawhwah</h2>
-            <div class="multiple-items">
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src='images/poster.jpg' alt="Movie Name">
-                    <div class="itemDesc">
-                        <h4 class="FilmTitle">Avengers</h4>
-                    </div>
-                </div>
-
+    <!--     BODY (VIDEO AND TITLES -->
+    <div style="margin-top: 5vh;">
+        <div style="width: 100vw; height: 75vh; position: relative; z-index: -1; overflow: hidden;">
+            <video class="videoAdd" autoplay muted loop>
+                <source src="bg.mp4" type="video/mp4">
+            </video>
+            <div class="video-content">
+                <img class="hide-small" style="height: 30vh;" src="images/CowboyBebop.png">
+                <h5 class="CategoryTitle hide-small" Title hide-small>Esses caçadores de recomepensa viajam pela galáxia
+                    atrás dos bandidos mais perigosos do universo. Eles estão prontos para salvar o mundo - se forem bem
+                    pagos, lógico!</h5>
+                <button type="button" class="hide-small button">Mais informações</button>
             </div>
+            <div class="video-blur"></div>
         </div>
 
+        <div id="parentDiv">
+            <div style="display: none;">
+                <h2 class="CategoryTitle">hawhwah</h2>
+                <div class="multiple-items">
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src='images/poster.jpg' alt="Movie Name">
+                        <div class="itemDesc">
+                            <h4 class="FilmTitle">Avengers</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div class="loading" data-title=".dot-flashing">
+        <div>
+            <div class="dot-flashing"></div>
+        </div>
+    </div>
 </body>
 
 </html>

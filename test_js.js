@@ -11,18 +11,6 @@ $(document).ready(async function () {
     secure_base_url = result.images.secure_base_url;
   });
 
-  //Start by getting the categories to display
-  var categories = await GetCategories();
-
-  console.log(categories);
-
-  //This is for creating multiple categories
-  for (i = 0; i < categories.length; i++) {
-    console.log("TIME TO "+categories[i].Name);
-    //await CreateCategories(categories[i]);
-  }
-  //CreateCategories(categories[0]);
-
   //This handles the navbar hide
   const checkpoint = 800;
 
@@ -33,9 +21,20 @@ $(document).ready(async function () {
     } else {
       opacity = 1;
     }
-    $(".header").css("background-color", " rgba(0,0,0," + opacity + ")");
+    $(".header").css("background-color", " rgba(20,20,20," + opacity + ")");
   });
 
+  //Start by getting the categories to display
+  var categories = await GetCategories();
+
+  console.log(categories);
+
+  //This is for creating multiple categories
+  for (i = 0; i < categories.length; i++) {
+    //console.log("TIME TO "+categories[i].Name);
+    await CreateCategories(categories[i]);
+  }
+  //CreateCategories(categories[0]);
 });
 
 //--- GET CATEGORIES
