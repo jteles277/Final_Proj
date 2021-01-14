@@ -38,7 +38,7 @@ $(document).ready(async function () {
 //--- GET CATEGORIES
 async function GetCategories() {
   console.log('Getting categories...');
-  var composedUri = categoriesUri + "?page=" + 1 + "&pageSize=" + 30;
+  var composedUri = categoriesUri;
 
   _ajax = await ajaxHelper(composedUri, 'GET');
 
