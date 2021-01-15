@@ -24,8 +24,6 @@ $(document).ready(async function () {
 
     var _search = (localStorage.getItem("searchInput"));
 
-    console.log(_search);
-
     //Only movies
     if (_search === "Movies") {
         ShowMovies();
@@ -143,6 +141,8 @@ async function GetTitleWPoster(titles) {
             continue;
         }
 
+        console.log(search);
+
         //If there are no results, skip it
         if (search === undefined || search.results.length === 0) {
             hasImage = false;
@@ -183,7 +183,6 @@ class TitlePlusPoster {
 function CreateItem(title) {
     //Creates all the titles labels
     //Loops through each title in a given category and creates an image.
-    console.log(title);
     var _name = title.title.Name;
     var _duration = title.title.Duration;
 

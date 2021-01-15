@@ -3,8 +3,20 @@ var categoriesUri = 'http://192.168.160.58/netflix/api/categories';
 var imageUri = 'https://api.themoviedb.org/3/search/movie?api_key=0bc1da750e2a1eee63910ae9652e526f&query=';
 var secure_base_url = '';
 
+var numOfItems_carousel = 6;
+
 $(document).ready(async function () {
   console.log("Hello world!");
+
+
+  //Sets the num of items per carousel according to platform
+  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    // true for mobile device
+    numOfItems_carousel = 3;
+  }else{
+    // false for not mobile device
+    numOfItems_carousel = 6;
+  }
 
   //Gets the secure base url
   await ajaxHelper('https://api.themoviedb.org/3/configuration?api_key=0bc1da750e2a1eee63910ae9652e526f', 'GET').done(function (result) {
@@ -72,10 +84,14 @@ async function CreateCategories(category) {
   carousel.appendChild(page);
   parentDiv.appendChild(carousel);
 
+  UpdateCarousel();
+}
+
+function UpdateCarousel(){
   $('.multiple-items').not('.slick-initialized').slick({
     infinite: true,
-    slidesToShow: 6,
-    slidesToScroll: 6
+    slidesToShow: numOfItems_carousel,
+    slidesToScroll: numOfItems_carousel
   });
 }
 
@@ -205,6 +221,12 @@ function OnlySeries () {
   window.location.replace("search.html");
 };
 
+//Mute-unmute
+function Mute_Unmute () {
+  video_banner.muted = !video_banner.muted;
+
+  video_sound.src = video_banner.muted ? "images/mute.png" : "images/unmute.png";
+};
 
 //--- Internal functions
 function ajaxHelper(uri, method, data) {

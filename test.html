@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Home - Netflix</title>
+    <link rel="icon" type="image/png" href="images/favicon.png"/>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/font-awesome.min.css" rel="stylesheet" />
     <link href="test_css.css" rel="stylesheet" />
@@ -41,10 +42,11 @@
 
     <!--     BODY (VIDEO AND TITLES -->
     <div style="margin-top: 5vh;">
-        <div style="width: 100vw; height: 75vh; position: relative; z-index: -1; overflow: hidden;">
-            <video class="videoAdd" autoplay muted loop>
+        <div style="width: 100vw; height: 75vh; position: relative; overflow: hidden;">
+            <video id="video_banner" class="videoAdd" autoplay muted loop>
                 <source src="bg.mp4" type="video/mp4">
             </video>
+            <a href="javascript:void(0);" onclick="Mute_Unmute()"><img id="video_sound" class="hide-small" src="images/mute.png"></a>
             <div class="video-content">
                 <img class="hide-small" style="height: 30vh;" src="images/CowboyBebop.png">
                 <h5 class="CategoryTitle hide-small" Title hide-small>Esses caçadores de recomepensa viajam pela galáxia
