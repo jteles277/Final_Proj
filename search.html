@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Search - Netflix</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="test_css.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick-theme.css" />
+</head>
+
+<body style="background-color: #141414;">
+    <script src="Scripts/jquery-3.5.1.min.js"></script>
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <script src="Scripts/jquery-3.5.1.min.js"></script>
+    <script src="slick-1.8.1/slick/slick.min.js"></script>
+    <script src="search.js"></script>
+    <!-- HEADER -->
+    <div class="header sticky" style="background-color: rgba(20,20,20,1);">
+        <!-- Logo -->
+        <a href="test.html"><img src="images/Netflix_Logo_PMS.png" height="50" alt="Netflix logo"></a>
+
+        <!-- List -->
+        <div class="header-left">
+            <a href="test.html">Início</a>
+            <a href="javascript:void(0);" onclick="OnlySeries()">Séries</a>
+            <a href="javascript:void(0);" onclick="OnlyMovies()">Filmes</a>
+        </div>
+        <div class="header-right">
+            <div class="input-group">
+                <div class="form-outline">
+                  <input type="search" id="search-input" class="form-control"/>
+                </div>
+                <button id="search-button" type="button" class="btn btn-dark">
+                </button>
+              </div>
+        </div>
+    </div>
+
+    <!--     BODY (VIDEO AND TITLES -->
+    <div id="parentGrid" style="margin-top: 5vh;">
+    </div>
+
+    <div id="loading" style="display: inline;" class="loading" data-title=".dot-flashing">
+        <div>
+            <div class="dot-flashing"></div>
+        </div>
+    </div>
+</body>
+
+</html>

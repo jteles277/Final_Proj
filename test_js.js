@@ -27,11 +27,8 @@ $(document).ready(async function () {
   //Start by getting the categories to display
   var categories = await GetCategories();
 
-  console.log(categories);
-
   //This is for creating multiple categories
   for (i = 0; i < categories.length; i++) {
-    //console.log("TIME TO "+categories[i].Name);
     await CreateCategories(categories[i]);
   }
   //CreateCategories(categories[0]);
@@ -67,8 +64,8 @@ async function CreateCategories(category) {
   page.className = "multiple-items";
 
   //Folhas container
-  for (i = 0; i < titles_to_display.length; i++) {
-    CreateItem(titles_to_display[i], page);
+  for (j = 0; j < titles_to_display.length; j++) {
+    CreateItem(titles_to_display[j], page);
   }
 
   carousel.appendChild(title);
@@ -91,7 +88,6 @@ class TitlePlusPoster {
 
 async function GetAvailableTitlesFromCategory(category) {
   console.log('Getting titles from category...');
-  console.log(category.Name + "-----------------------------------------------");
 
   var composedUri = categoriesUri + "/" + category.Id;
 
@@ -105,10 +101,9 @@ async function GetAvailableTitlesFromCategory(category) {
   }
 
 
-  for (i = 0; i < Math.min(_ajax.Titles.length, 30); i++) {
+  for (k = 0; k < Math.min(_ajax.Titles.length, 24); k++) {
 
-    console.log(_ajax.Titles[i]);
-    var title = _ajax.Titles[i];
+    var title = _ajax.Titles[k];
 
     //If the name contains ?, skip it
     if (title.Name.includes("?"))
@@ -186,35 +181,30 @@ function CreateItem(title, _parentDiv) {
   _parentDiv.appendChild(itemDiv);
 }
 
-//--- GET TITLES
-function GetTitlesByCategory(id, name) {
-  //console.log('Getting titles of the category '+name+'...');
-  var composedUri = self.categoriesUri() + "/" + id;
-  ajaxHelper(composedUri, 'GET').done(function (data) {
-    //console.log(data);
-    return data;
-  });
-}
+//Search
+$(document).on("click", "#search-button", function(){
 
-//--- GET IMAGE
-function GetImageByID(id) {
-  //console.log('Getting titles of the category '+name+'...');
-  ajaxHelper('https://api.themoviedb.org/3/movie/' + id + '/images?api_key=0bc1da750e2a1eee63910ae9652e526f', 'GET').done(function (img) {
-    console.log("IMG " + img)
-  });
-}
+var _input = $("#search-input").val();
 
-//--- GET ID
-function GetTitleID(title) {
-  //console.log('Getting titles of the category '+name+'...');
-  var composedUri = 'https://api.themoviedb.org/3/search/movie?api_key=0bc1da750e2a1eee63910ae9652e526f&query=' + title + '&page=1';
-  ajaxHelper(composedUri, 'GET').done(function (data) {
-    if (data != undefined && data.result != undefined && data.result[0].id != undefined)
-      return data.results[0].id
-    else
-      return null;
-  });
-}
+if (_input != null && _input.trim() !== ''){
+  localStorage.setItem("searchInput",_input);
+  window.location.replace("search.html");
+  }
+
+});
+
+//Only movies
+function OnlyMovies () {
+  localStorage.setItem("searchInput", "Movies");
+  window.location.replace("search.html");
+};
+
+//Only series
+function OnlySeries () {
+  localStorage.setItem("searchInput", "Series");
+  window.location.replace("search.html");
+};
+
 
 //--- Internal functions
 function ajaxHelper(uri, method, data) {

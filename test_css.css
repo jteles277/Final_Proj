@@ -1,5 +1,12 @@
 html{
     overflow-x: hidden;
+
+    -webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
 }
 /* -----------------------HEADER-------------------------- */
 /* The header itself */
@@ -30,6 +37,7 @@ html{
     line-height: 25px;
     border-radius: 4px;
 }
+
 
 /* Style the active/current link*/
 .header a.active {
@@ -83,7 +91,7 @@ html{
      padding: 0 1vw;
  }
 
- .itemDesc{
+/*  .itemDesc{
      height: 0%;
      width: 100%;
      position: absolute;
@@ -91,7 +99,18 @@ html{
      bottom: 0;
      padding: 10%;
      background: linear-gradient(0, rgba(0, 0, 0, 0.3) 0%,rgba(0, 0, 0, 0.1) 70%, rgba(0, 0, 0, 0) 100%);
- }
+ } */
+
+ .itemDesc{
+  height: 0%;
+  width: 100%;
+  position: absolute;
+  display: none;
+  bottom: 0;
+  left: 0;
+  padding: 10%;
+  background: linear-gradient(0, rgba(0, 0, 0, 0.3) 0%,rgba(0, 0, 0, 0.1) 70%, rgba(0, 0, 0, 0) 100%);
+}
 
  
  .item:hover div{
@@ -222,3 +241,12 @@ html{
       background-color: rgba(0, 0, 0, 0.3);
     }
   }
+
+  /*----------------------------------SEARCH--------------------*/
+  #parentGrid{
+    padding: 10vh 20px 20px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    justify-content: center;
+    gap: 10px;
+}
