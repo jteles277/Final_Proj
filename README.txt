@@ -1,4 +1,4 @@
-Trabalho finalde ITW feito por Bruno Rocha e João Teles.
+Trabalho final de ITW feito por Bruno Rocha e João Teles.
 
 
 
