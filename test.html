@@ -10,134 +10,60 @@
     <link href="test_css.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick-theme.css" />
-</head>
-
-<body style="background-color: #141414;">
-    <script src="Scripts/jquery-3.5.1.min.js"></script>
-    <script src="Scripts/bootstrap.bundle.min.js"></script>
-    <script src="slick-1.8.1/slick/slick.min.js"></script>
-    <script src="test_js.js"></script>
-    <!-- HEADER -->
-    <div class="header sticky">
-        <!-- Logo -->
-        <img src="images/Netflix_Logo_PMS.png" height="50" alt="Netflix logo">
-
-        <!-- List -->
-        <div class="header-left">
-            <a class="active">Início</a>
-            <a href="javascript:void(0);" onclick="OnlySeries()">Séries</a>
-            <a href="javascript:void(0);" onclick="OnlyMovies()">Filmes</a>
-        </div>
-        <div class="header-right">
-            <div class="input-group">
-                <div class="form-outline">
-                    <input type="search" id="search-input" class="form-control" />
-                </div>
-                <button id="search-button" type="button" class="btn btn-dark">
-                </button>
+    </head>
+    
+    <body style="background-color: #141414;">
+        <script src="Scripts/jquery-3.5.1.min.js"></script>
+        <script src="Scripts/bootstrap.bundle.min.js"></script>
+        <script src="slick-1.8.1/slick/slick.min.js"></script>
+        <script src="test_js.js"></script>
+        <!-- HEADER -->
+        <div class="header sticky">
+            <!-- Logo -->
+            <img src="images/Netflix_Logo_PMS.png" height="50" alt="Netflix logo">
+    
+            <!-- List -->
+            <div class="header-left">
+                <a class="active">Início</a>
+                <a href="javascript:void(0);" onclick="OnlySeries()">Séries</a>
+                <a href="javascript:void(0);" onclick="OnlyMovies()">Filmes</a>
             </div>
-        </div>
-    </div>
-
-    <!--     BODY (VIDEO AND TITLES -->
-    <div style="margin-top: 5vh;">
-        <div style="width: 100vw; height: 75vh; position: relative; overflow: hidden;">
-            <video id="video_banner" class="videoAdd" autoplay muted loop>
-                <source src="bg.mp4" type="video/mp4">
-            </video>
-            <a href="javascript:void(0);" onclick="Mute_Unmute()"><img id="video_sound" class="hide-small"
-                    src="images/mute.png"></a>
-            <div class="video-content">
-                <img class="hide-small" style="height: 30vh;" src="images/CowboyBebop.png">
+            <div class="header-right">
+                <div id="search-bar">
+                    <form autocomplete="on" onsubmit="SearchBar(); return false;">
+                        <input autocomplete="off" id="search" onclick="Search()" type="text" placeholder="Título, gente e gêneros" spellcheck="false">
+                        <img id="lupa" width="20px" src="images/search.png"></img>
+                    </form>
+                </div>
+            </div>
+            </div>
+            
+            <!--     BODY (VIDEO AND TITLES -->
+            <div style="margin-top: 5vh;">
+                <div style="width: 100vw; height: 75vh; position: relative; overflow: hidden;">
+                    <video id="video_banner" class="videoAdd" autoplay muted loop>
+                        <source src="bg.mp4" type="video/mp4">
+                    </video>
+                    <div style="  position: absolute; right: 15vw; bottom: 35%; ">
+                        <img id="video_sound" class="hide-small" src="images/mute.png">
+                        <a id="mute_a" href="javascript:void(0);" onclick="Mute_Unmute()">
+                            <div class="video_sound-circle hide-small">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="video-content">
+                        <img class="hide-small" style="height: 30vh;" src="images/CowboyBebop.png">
                 <h5 class="CategoryTitle hide-small" Title hide-small>Esses caçadores de recomepensa viajam pela galáxia
                     atrás dos bandidos mais perigosos do universo. Eles estão prontos para salvar o mundo - se forem bem
                     pagos, lógico!</h5>
-                <button type="button" class="hide-small button" onclick="ModalOpen();">Mais informações</button>
+                <button type="button" class="hide-small btn btn-light" onclick="ModalOpen(this);"><script id="bebop_script">
+                </script> informações</button>
             </div>
             <div class="video-blur"></div>
         </div>
 
         <div id="parentDiv">
-            <div style="display: none;">
-                <h2 class="CategoryTitle">hawhwah</h2>
-                <div class="multiple-items">
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
 
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src='images/poster.jpg' alt="Movie Name">
-                        <div class="itemDesc">
-                            <h4 class="FilmTitle">Avengers</h4>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
 

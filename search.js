@@ -32,6 +32,7 @@ $(document).ready(async function () {
     });
 
     var _search = (localStorage.getItem("searchInput"));
+    console.log("Search for term:" + _search)
 
     //Only movies
     if (_search === "Movies") {
@@ -260,16 +261,16 @@ function ajaxHelper(uri, method, data) {
 }
 
 //Search
-$(document).on("click", "#search-button", function () {
+function SearchBar () {
 
-    var _input = $("#search-input").val();
+    var _input = $("#search").val();
 
     if (_input != null && _input.trim() !== '') {
         localStorage.setItem("searchInput", _input);
         window.location.replace("search.html");
     }
 
-});
+};
 
 //Only movies
 function OnlyMovies () {

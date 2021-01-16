@@ -6,9 +6,13 @@ var secure_base_url = '';
 
 var numOfItems_carousel = 6;
 
+var bebop_json = '{"prof_api":{"Id":80208951,"Name":"Cowboy Bebop","DateAdded":"2018-04-07T00:00:00","Description":"Spike Spiegel, um rapaz com o passado misterioso e Jet Black, um ex-policial, se unem para ir atrás de criminosos que possuem a cabeça a prêmio, dentro da nave “Bebop”. Ao longo do caminho eles se encontram com personagens nada comuns, um cão muito raro que possui grande inteligência, Ein, a gananciosa e fatal Feye Valentine e muitos outros.","Duration":"26 episódios","ReleaseYear":1998,"Rating":{"Id":6,"Code":"TV-MA","Titles":0},"Type":{"Id":1,"Name":"Movie","Titles":0},"Actors":[{"Id":1491,"Name":"Kouichi Yamadera","Titles":0},{"Id":5350,"Name":"Unsho Ishizuka","Titles":0},{"Id":4104,"Name":"Megumi Hayashibara","Titles":0},{"Id":8053,"Name":"Aoi Tada","Titles":0},{"Id":2516,"Name":"Norio Wakamoto","Titles":0},{"Id":18998,"Name":"Tyrone Keogh","Titles":0},{"Id":18997,"Name":"Xu Qing","Titles":0}],"Countries":[{"Id":14,"Name":"China","Titles":0},{"Id":26,"Name":"South Africa","Titles":0},{"Id":2,"Name":"United States","Titles":0}],"Directors":[{"Id":2425,"Name":"Shinichiro Watanabe","Titles":0}],"Categories":[{"Id":1,"Name":"Action & Adventure","Titles":0},{"Id":1,"Name":"Anime Series","Titles":0},{"Id":1,"Name":"Crime","Titles":0},{"Id":1,"Name":"Drama, mais","Titles":0}]},"movie_api":{"adult":false,"backdrop_path":"/gu9VOyEmCLQZ0yPweOY0zIOgV3.jpg","genre_ids":[28,878,53,9648],"id":470114,"original_language":"en","original_title":"Cowboy Bebop","overview":"An assassin seeks redemption after being given a second chance at life.","popularity":17.676,"poster_path":"/w0MXP33x1bq48TDC7IaNqQ8nxcc.jpg","release_date":"1998-10-26","title":"Cowboy Bebop","video":false,"vote_average":8.4,"vote_count":427}}'
+
 $(document).ready(async function () {
   console.log("Hello world!");
 
+  //Loads bebop json
+  bebop_script.innerHTML = (bebop_json);
 
   //Sets the num of items per carousel according to platform
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -205,16 +209,16 @@ function CreateItem(title, _parentDiv) {
 }
 
 //Search
-$(document).on("click", "#search-button", function () {
+function SearchBar () {
 
-  var _input = $("#search-input").val();
+  var _input = $("#search").val();
 
   if (_input != null && _input.trim() !== '') {
-    localStorage.setItem("searchInput", _input);
-    window.location.replace("search.html");
+      localStorage.setItem("searchInput", _input);
+      window.location.replace("search.html");
   }
 
-});
+};
 
 //Only movies
 function OnlyMovies() {
@@ -240,7 +244,7 @@ function ModalOpen(tag) {
   $('#Modal').modal('show');
 
   var title = (JSON.parse(tag.getElementsByTagName('script')[0].innerHTML));
-  console.log(title.prof_api)
+  console.log(JSON.stringify(title))
 
   $("#modal-backdrop").attr("src", secure_base_url + '/w500' + title.movie_api.backdrop_path);
 

@@ -29,13 +29,12 @@
             <a href="javascript:void(0);" onclick="OnlyMovies()">Filmes</a>
         </div>
         <div class="header-right">
-            <div class="input-group">
-                <div class="form-outline">
-                  <input type="search" id="search-input" class="form-control"/>
-                </div>
-                <button id="search-button" type="button" class="btn btn-dark">
-                </button>
-              </div>
+            <div id="search-bar">
+                <form autocomplete="on" onsubmit="SearchBar(); return false;">
+                    <input autocomplete="off" id="search" onclick="Search()" type="text" placeholder="Título, gente e gêneros" spellcheck="false">
+                    <img id="lupa" width="20px" src="images/search.png"></img>
+                </form>
+            </div>
         </div>
     </div>
 
