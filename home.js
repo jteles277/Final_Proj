@@ -1,4 +1,4 @@
-//Code by Bruno
+//Code by Bruno. Hire me
 //Uri Variables
 var categoriesUri = 'http://192.168.160.58/netflix/api/categories';
 var titlesUri = 'http://192.168.160.58/netflix/api/titles';
@@ -135,11 +135,13 @@ async function GetAvailableTitlesFromCategory(category) {
 
 
   //Now, loops through each title from the category.
-  //We only display up to 24 items. Display all the items would take too long.
-  for (k = 0; k < Math.min(_ajax.Titles.length, 24); k++) {
+  //Get a random selection of tiles from the array.
+  //We only display up to 24 items. Displaying all the items would take too long.
+  var random_titles = (GetRandomItems(_ajax.Titles, 24));
+  for (k = 0; k < random_titles.length; k++) {
 
     //Gets the reference for the currently iterating title.
-    var title = _ajax.Titles[k];
+    var title = random_titles[k];
 
     //Gets the complete information about the item through anothher Ajax Fetch. If it catches an error, skip to the next item of the array.
     var tiltes_composedUri = titlesUri + "/" + title.Id;
@@ -178,12 +180,32 @@ async function GetAvailableTitlesFromCategory(category) {
   return (titles_list);
 }
 
+/*
+This function get a given number of items from an array randomly.
+This is so that everytime you refresh the base you'll see diferent titles that are not displaye in aphabetical order.
+*/
+function GetRandomItems(titles, num) {
+  var result = [];
+  for (h = 0; h < num;) {
+    if (titles.length - h <= 0)
+      break;
+
+    var title_random = titles[getRandomInt(0,titles.length)]; 
+    if (title_random != undefined && !result.includes(title_random)){
+      h++;
+      result.push(title_random);
+    }
+  }
+  return result;
+}
+
 //We are using this Jquery library called Slick to make carousels. Way fewer elements and classes than Bootstrap.
 function EnableCarousel() {
   $('.multiple-items').not('.slick-initialized').slick({
     infinite: true,
     slidesToShow: numOfItems_carousel,
-    slidesToScroll: numOfItems_carousel
+    slidesToScroll: numOfItems_carousel,
+    draggable: false
   });
 }
 
@@ -342,6 +364,14 @@ $(document).on('hide.bs.modal', '#Modal', function () {
     'overflowY': 'auto', 'overflowX': 'hidden'
   });
 });
+
+//Internal fuction. It gets a random int between a range.
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 
 //Internal function that makes it easier to make ajax fetches.
 function ajaxHelper(uri, method, data) {

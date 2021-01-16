@@ -1,4 +1,4 @@
-//Code by Bruno
+//Code by Bruno. Hire me
 //Uri Variables
 var allMovies = 'http://192.168.160.58/netflix/api/Movies';
 var allSeries = 'http://192.168.160.58/netflix/api/Series';
@@ -42,12 +42,14 @@ $(document).ready(async function () {
 
   //If it's do display only movies, then do it.
   if (_search === "Movies") {
+    movies_label.className = "active";
     ShowMovies();
     return;
   }
 
   //If it's do display only series, then do it.
   if (_search === "Series") {
+    series_label.className = "active";
     ShowSeries();
     return;
   }
@@ -224,7 +226,7 @@ async function GetAvailableTitles(titles) {
     //If it made it this far, then it qualifies. Make the TitlePlusPoster object with both API's object.
     var title_plus_poster = new TitlePlusPoster(title_ajax, search.results[0]);
     //If the title was not already added, add it and generate it.
-    if (titles_added.indexOf(title_ajax.Name) === -1)
+    if (!titles_added.includes(title_ajax.Name))
       titles_added.push(title_ajax.Name);
     else
       break;
