@@ -24,14 +24,14 @@
     
             <!-- List -->
             <div class="header-left">
-                <a class="active">Início</a>
-                <a href="javascript:void(0);" onclick="OnlySeries()">Séries</a>
-                <a href="javascript:void(0);" onclick="OnlyMovies()">Filmes</a>
+                <a class="active">Home</a>
+                <a href="javascript:void(0);" onclick="OnlySeries()">Series</a>
+                <a href="javascript:void(0);" onclick="OnlyMovies()">Movies</a>
             </div>
             <div class="header-right">
                 <div id="search-bar">
                     <form autocomplete="on" onsubmit="SearchBar(); return false;">
-                        <input autocomplete="off" id="search" onclick="Search()" type="text" placeholder="Título, gente e gêneros" spellcheck="false">
+                        <input autocomplete="off" id="search" onclick="Search()" type="text" placeholder="Titles, people and categories" spellcheck="false">
                         <img id="lupa" width="20px" src="images/search.png"></img>
                     </form>
                 </div>
@@ -53,11 +53,12 @@
                     </div>
                     <div class="video-content">
                         <img class="hide-small" style="height: 30vh;" src="images/CowboyBebop.png">
-                <h5 class="CategoryTitle hide-small" Title hide-small>Esses caçadores de recomepensa viajam pela galáxia
-                    atrás dos bandidos mais perigosos do universo. Eles estão prontos para salvar o mundo - se forem bem
-                    pagos, lógico!</h5>
+                <h5 class="CategoryTitle hide-small" Title hide-small>A ragtag crew of bounty hunters chases down the galaxy's most dangerous criminals. They'll save the world ... for the right price.</h5>
                 <button type="button" class="hide-small btn btn-light" onclick="ModalOpen(this);"><script id="bebop_script">
-                </script> informações</button>
+                </script> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+</svg>    More information</button>
             </div>
             <div class="video-blur"></div>
         </div>
@@ -86,8 +87,8 @@
                         <li class="list-group-item dg modal-list" style=" overflow-wrap: break-word;"><span id="modal-rating" style="color: #46d268; padding-right: 2vw;">Rating </span><span id="modal-pg" style="color: white; padding: 0.1vw 0.5vw;"></span><span id="modal-year" style="color: white; padding: 0 2vw;">ReleaseYear </span><span id="modal-duration" style="color: white;">Duration </span></li>
                         <li class="list-group-item dg modal-list" style=" overflow-wrap: break-word;"><p id="modal-description">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAA</p></li>
                         <li class="list-group-item dg modal-list" style=" overflow-wrap: break-word;"> </li>
-                        <li class="list-group-item dg modal-list" style=" overflow-wrap: break-word;"><span style="color: #777777;">Elenco: </span> <p id="modal-elenco" style="color: white;">Elenco</p>  </li>              
-                        <li class="list-group-item dg modal-list" style=" overflow-wrap: break-word;"><span style="color: #777777;">Gêneros: </span> <p id="modal-categories" style="color: white;">Generos</p>  </li>              
+                        <li class="list-group-item dg modal-list" style=" overflow-wrap: break-word;"><span style="color: #777777;">Cast: </span> <p id="modal-elenco" style="color: white;">Elenco</p>  </li>              
+                        <li class="list-group-item dg modal-list" style=" overflow-wrap: break-word;"><span style="color: #777777;">Categories: </span> <p id="modal-categories" style="color: white;">Generos</p>  </li>              
                         <li class="list-group-item dg modal-list" style=" overflow-wrap: break-word;"><span style="color: #777777;">Director: </span><p id="modal-directors" style="color: white;">Director</p> </li>
                     </ul>
                 </div>

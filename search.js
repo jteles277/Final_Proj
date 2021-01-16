@@ -304,14 +304,14 @@ function ModalOpen(tag) {
     var _actors = "";
 
     if (title.prof_api.Actors == 0)
-        _actors = "Nenhum elenco";
+        _actors = "No cast";
     for (a = 0; a < title.prof_api.Actors.length; a++) {
         _actors = _actors + (title.prof_api.Actors[a].Name);
         if (a != title.prof_api.Actors.length - 1)
             _actors = _actors + ", ";
 
         if (a >= 5) {
-        _actors = _actors + "mais";
+        _actors = _actors + "more";
         break;
       }
     }
@@ -328,7 +328,7 @@ function ModalOpen(tag) {
   
       if(a >= 5)
       {
-        _categories = _categories + "mais";
+        _categories = _categories + "more";
         break;
       }
     }
@@ -338,14 +338,14 @@ function ModalOpen(tag) {
     var _directors = "";
   
     if (title.prof_api.Directors.length == 0)
-      _directors = "Nenhum diretor";
+      _directors = "No diretor";
     for (a = 0; a < title.prof_api.Directors.length; a++) {
       _directors = _directors + (title.prof_api.Directors[a].Name);
       if (a != title.prof_api.Directors.length - 1)
         _directors = _directors + ", ";
   
       if (a >= 5) {
-        _directors = _directors + "mais";
+        _directors = _directors + "more";
         break;
       }
     }

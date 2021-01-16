@@ -150,7 +150,7 @@ user-select: none;
 }
 
 #video_sound{
-  width: 32px;
+  width: 24px;
 
   position: absolute;
   float: left;
@@ -169,8 +169,8 @@ user-select: none;
   top: 45%;
   transform: translate(-50%, -50%);
 
-    width: 58px;
-    height: 58px;
+    width: 52px;
+    height: 52px;
 
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
