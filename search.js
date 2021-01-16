@@ -9,8 +9,17 @@ var searchDirectorsUri = 'http://192.168.160.58/netflix/api/search/Directors?nam
 var searchTitlesUri = 'http://192.168.160.58/netflix/api/search/Titles?name=';
 var searchCountryUri = 'http://192.168.160.58/netflix/api/search/Countries?name=';
 
+var actorUri = 'http://192.168.160.58/netflix/api/Actors/';
+var categoryUri = 'http://192.168.160.58/netflix/api/Categories/';
+var directorsUri = 'http://192.168.160.58/netflix/api/Directors/';
+var titlesUri = 'http://192.168.160.58/netflix/api/Titles/';
+var countryUri = 'http://192.168.160.58/netflix/api/Countries/';
+
+
 var imageUri = 'https://api.themoviedb.org/3/search/movie?api_key=0bc1da750e2a1eee63910ae9652e526f&query=';
 var secure_base_url = '';
+
+var titles_added = [];
 
 $(document).ready(async function () {
     console.log("Hello world!");
@@ -76,32 +85,48 @@ async function Search(_search) {
 
 //--- GET ACTORS
 async function GetActors(_term) {
+
     console.log('Getting actors...');
     var composedUri = searchActorUri + _term;
 
     _ajax = await ajaxHelper(composedUri, 'GET');
 
-    GetTitleWPoster(_ajax);
+
+    for (a = 0; a < _ajax.length; a++) {
+        _result = await ajaxHelper(actorUri + _ajax[a].Id, 'GET');
+
+        GetTitleWPoster(_result.Titles);
+    }
 }
 
 //--- GET CATEGORIES
 async function GetCategories(_term) {
+
     console.log('Getting categories...');
     var composedUri = searchCategoriesUri + _term;
 
     _ajax = await ajaxHelper(composedUri, 'GET');
 
-    GetTitleWPoster(_ajax);
+    for (a = 0; a < _ajax.length; a++) {
+        _result = await ajaxHelper(categoryUri + _ajax[a].Id, 'GET');
+
+        GetTitleWPoster(_result.Titles);
+    }
 }
 
 //--- GET DIRECTORS
 async function GetDirectors(_term) {
+
     console.log('Getting directors...');
     var composedUri = searchDirectorsUri + _term;
 
     _ajax = await ajaxHelper(composedUri, 'GET');
 
-    GetTitleWPoster(_ajax);
+    for (a = 0; a < _ajax.length; a++) {
+        _result = await ajaxHelper(directorsUri + _ajax[a].Id, 'GET');
+
+        GetTitleWPoster(_result.Titles);
+    }
 }
 
 //--- GET TITLES
@@ -121,7 +146,11 @@ async function GetCountries(_term) {
 
     _ajax = await ajaxHelper(composedUri, 'GET');
 
-    GetTitleWPoster(_ajax);
+    for (a = 0; a < _ajax.length; a++) {
+        _result = await ajaxHelper(countryUri + _ajax[a].Id, 'GET');
+
+        GetTitleWPoster(_result.Titles);
+    }
 }
 
 async function GetTitleWPoster(titles) {
@@ -129,19 +158,23 @@ async function GetTitleWPoster(titles) {
 
         var title = titles[i];
 
-        //Gets the image
-        var hasImage = true;
-        var img_path = "n/a";
-
+        var tiltes_composedUri = titlesUri + "/" + title.Id;
 
         try {
-            var search = await ajaxHelper(imageUri + title.Name + '&language=en-US&page=1', 'GET');
+          var title_ajax = await ajaxHelper(tiltes_composedUri, 'GET');
+        }
+        catch {
+          continue;
+        }
+
+        //Gets the image
+        var hasImage = true;
+        try {
+            var search = await ajaxHelper(imageUri + title_ajax.Name + '&language=en-US&page=1', 'GET');
         }
         catch {
             continue;
         }
-
-        console.log(search);
 
         //If there are no results, skip it
         if (search === undefined || search.results.length === 0) {
@@ -149,24 +182,22 @@ async function GetTitleWPoster(titles) {
         }
         else {
             //If the result doesnt contain the name, skip it.
-            if ((!search.results[0].title.includes(title.Name))) {
+            if ((!search.results[0].title.includes(title_ajax.Name))) {
                 hasImage = false;
             }
             else {
                 //If the image is null, skip it.
-                if (search.results[0].poster_path === null)
-                    hasImage = false;
-                else
-                    //Finally, gets the image path
-                    img_path = secure_base_url + '/w500' + search.results[0].poster_path;
+                if (search.results[0].poster_path === null || search.results[0].backdrop_path === null)
+                hasImage = false;
             }
         }
-
 
         if (!hasImage)
             continue;
 
-        var title_plus_poster = new TitlePlusPoster(title, img_path);
+        var title_plus_poster = new TitlePlusPoster(title_ajax, search.results[0]);
+
+        titles_added.indexOf(title_ajax.Name) === -1 ? titles_added.push(title_ajax.Name) : console.log("This item already exists");
 
         CreateItem(title_plus_poster);
     }
@@ -174,23 +205,29 @@ async function GetTitleWPoster(titles) {
 }
 
 class TitlePlusPoster {
-    constructor(title, poster) {
-        this.title = title;
-        this.poster = poster;
+    constructor(prof_api, movie_api) {
+      this.prof_api = prof_api;
+      this.movie_api = movie_api;
     }
-}
+  }
 
 function CreateItem(title) {
     //Creates all the titles labels
     //Loops through each title in a given category and creates an image.
-    var _name = title.title.Name;
-    var _duration = title.title.Duration;
+    var _name = title.prof_api.Name;
+
+    var anchor = document.createElement("a");
+    anchor.setAttribute("onClick", "ModalOpen(this);");
+    anchor.href = "javascript:void(0);";
+  
+    var script = document.createElement("script");
+    script.innerHTML = JSON.stringify(title);
 
     var itemDiv = document.createElement("div");
     itemDiv.className = "item";
 
     var _img = document.createElement("img");
-    _img.src = title.poster;
+    _img.src = secure_base_url + '/w500' + title.movie_api.poster_path;
     _img.alt = _name;
 
     var _itemDesc = document.createElement("div");
@@ -200,10 +237,12 @@ function CreateItem(title) {
     _title.className = "FilmTitle";
     _title.innerHTML = _name;
 
-    _itemDesc.appendChild(_title);
-    itemDiv.appendChild(_itemDesc);
-    itemDiv.appendChild(_img);
-    parentGrid.appendChild(itemDiv);
+  _itemDesc.appendChild(_title);
+  itemDiv.appendChild(_itemDesc);
+  itemDiv.appendChild(_img);
+  anchor.appendChild(itemDiv);
+  anchor.appendChild(script);
+  parentGrid.appendChild(anchor);
 }
 
 //--- Internal functions
@@ -243,3 +282,85 @@ function OnlyMovies () {
     localStorage.setItem("searchInput", "Series");
     window.location.replace("search.html");
   };
+
+  
+//Open Modal
+function ModalOpen(tag) {
+    $('#Modal').modal('show');
+  
+    var title = (JSON.parse(tag.getElementsByTagName('script')[0].innerHTML));
+  console.log(title)
+  
+    $("#modal-backdrop").attr("src", secure_base_url + '/w500' + title.movie_api.backdrop_path);
+  
+    $("#modal-title").text(title.prof_api.Name);
+    $("#modal-description").text(title.prof_api.Description);
+    $("#modal-rating").text(title.movie_api.vote_average + "★");
+    $("#modal-year").text(title.prof_api.ReleaseYear);
+    $("#modal-year").text(title.prof_api.ReleaseYear);
+    $("#modal-duration").text(title.prof_api.Duration);
+
+    var _actors = "";
+
+    if (title.prof_api.Actors == 0)
+        _actors = "Nenhum elenco";
+    for (a = 0; a < title.prof_api.Actors.length; a++) {
+        _actors = _actors + (title.prof_api.Actors[a].Name);
+        if (a != title.prof_api.Actors.length - 1)
+            _actors = _actors + ", ";
+
+        if (a >= 5) {
+        _actors = _actors + "mais";
+        break;
+      }
+    }
+    
+    _actors = _actors.trimEnd(',');
+    $("#modal-elenco").text(_actors);
+  
+    var _categories = "";
+  
+    for (a = 0; a < title.prof_api.Categories.length; a++) {
+      _categories = _categories + (title.prof_api.Categories[a].Name);
+      if (a != title.prof_api.Categories.length - 1)
+      _categories = _categories + ", ";
+  
+      if(a >= 5)
+      {
+        _categories = _categories + "mais";
+        break;
+      }
+    }
+    _categories = _categories.trimEnd(',');
+    $("#modal-categories").text(_categories);
+  
+    var _directors = "";
+  
+    if (title.prof_api.Directors.length == 0)
+      _directors = "Nenhum diretor";
+    for (a = 0; a < title.prof_api.Directors.length; a++) {
+      _directors = _directors + (title.prof_api.Directors[a].Name);
+      if (a != title.prof_api.Directors.length - 1)
+        _directors = _directors + ", ";
+  
+      if (a >= 5) {
+        _directors = _directors + "mais";
+        break;
+      }
+    }
+    _directors = _directors.trimEnd(',');
+    $("#modal-directors").text(_directors);
+  
+    $("#modal-pg").text(title.prof_api.Rating.Code);
+  
+    $('html, body').css({
+      overflow: 'hidden'
+    });
+  
+  }
+  
+  $(document).on('hide.bs.modal', '#Modal', function () {
+    $('html, body').css({
+      overflow: 'auto'
+    });
+  });

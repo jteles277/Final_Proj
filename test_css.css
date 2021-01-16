@@ -23,7 +23,7 @@ user-select: none;
 .sticky{
     position:fixed;
     top:0;
-    z-index: 999999;
+    z-index: 40;
 }
 
 .header a {
@@ -112,6 +112,13 @@ user-select: none;
   background: linear-gradient(0, rgba(0, 0, 0, 0.3) 0%,rgba(0, 0, 0, 0.1) 70%, rgba(0, 0, 0, 0) 100%);
 }
 
+.itemDesc h4{
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.2);
+  margin: 0 -10px;
+  padding: 1vh 0;
+}
+
  
  .item:hover div{
     height: fit-content;
@@ -194,6 +201,7 @@ user-select: none;
     width: 0px;
     margin-bottom: 5%;
 }
+
 /**
  * ==============================================
  * Dot Flashing
@@ -256,4 +264,71 @@ user-select: none;
     grid-template-columns: repeat(auto-fit, 250px);
     justify-content: center;
     gap: 10px;
+}
+/*-------------------------------MODAL----------------------*/
+#Modal{
+  z-index: 999999;
+}
+
+#modal-page{
+  height: fit-content;
+  background-color: #141414;
+
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+
+#modal-header{
+  position: relative; overflow: hidden;
+  align-items: center;
+}
+
+#modal-title{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+  color: white;
+  text-align: center;
+  width: 100%;
+  margin: 10% 0;
+  text-shadow:0 0.1em rgba(0, 0, 0, 0.3);
+}
+
+#modal-close-button{
+  position: absolute;
+  top: 10%;
+  right: 0%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.dot {
+  height: 30px;
+  width: 30px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.modal-list{
+  background-color: #141414;
+}
+
+
+.modal-list p{
+  overflow-wrap: break-word;
+  color: white;
+}
+
+#modal-pg{
+  background-color:#141414;
+  outline-style: solid;
+  outline-width: 0.1em;
+  outline-color: white;
 }
