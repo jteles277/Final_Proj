@@ -372,7 +372,6 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
 //Internal function that makes it easier to make ajax fetches.
 function ajaxHelper(uri, method, data) {
   return $.ajax({

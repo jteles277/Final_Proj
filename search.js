@@ -104,7 +104,6 @@ function shuffleArray(array) {
   }
 }
 
-
 /*    SEARCH TITLES    */
 async function Search(_search) {
   //Search for the term in all of the below methods.
@@ -370,6 +369,7 @@ function ModalOpen(tag) {
       break;
     }
   }
+  
   _categories = _categories.trimEnd(',');
   $("#modal-categories").text(_categories);
 
