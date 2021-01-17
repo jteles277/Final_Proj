@@ -63,9 +63,12 @@ $(document).ready(async function () {
 async function ShowMovies() {
   //Gets a slice of 100 items from all the movies and creates it.
   console.log('Getting all movies...');
-  var composedUri = allMovies + "?page=" + getRandomInt(1, 30) + "&pagesize=100";
+  var composedUri = allMovies + "?page=1" + "&pagesize=1000";
 
   _ajax = await ajaxHelper(composedUri, 'GET');
+
+  //Shuffles the array so that it does not always display items in the same order.
+  (shuffleArray(_ajax.Titles));
 
   GetAvailableTitles(_ajax.Titles);
 }
@@ -73,19 +76,34 @@ async function ShowMovies() {
 async function ShowSeries() {
   //Gets a slice of 100 items from all the series and creates it.
   console.log('Getting all series...');
-  var composedUri = allSeries + "?page=" + getRandomInt(1, 30) + "&pagesize=100";
+  var composedUri = allSeries + "?page=1" + "&pagesize=1000";
 
   _ajax = await ajaxHelper(composedUri, 'GET');
+
+  //Shuffles the array so that it does not always display items in the same order.
+  (shuffleArray(_ajax.Titles));
 
   GetAvailableTitles(_ajax.Titles);
 }
 
-//Internal fuction. It gets a random int between a range.
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+/* Randomize array in-place using Durstenfeld shuffle algorithm */
+function shuffleArray(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 }
+
 
 /*    SEARCH TITLES    */
 async function Search(_search) {
