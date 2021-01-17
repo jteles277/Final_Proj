@@ -9,7 +9,7 @@ var secure_base_url = '';
 var numOfItems_carousel = 6;
 
 //JSON file stringified of the cowboy bebop object.
-var bebop_json = '{"prof_api":{"Id":80208951,"Name":"Cowboy Bebop","DateAdded":"2018-04-07T00:00:00","Description":"In 2071, roughly fifty years after an accident with a hyperspace gateway made the Earth almost uninhabitable, humanity has colonized most of the rocky planets and moons of the Solar System. Amid a rising crime rate, the Inter Solar System Police (ISSP) set up a legalized contract system, in which registered bounty hunters (also referred to as Cowboys) chase criminals and bring them in alive in return for a reward.","Duration":"26 Sessions","ReleaseYear":1998,"Rating":{"Id":6,"Code":"TV-MA","Titles":0},"Type":{"Id":1,"Name":"Movie","Titles":0},"Actors":[{"Id":1491,"Name":"Kouichi Yamadera","Titles":0},{"Id":5350,"Name":"Unsho Ishizuka","Titles":0},{"Id":4104,"Name":"Megumi Hayashibara","Titles":0},{"Id":8053,"Name":"Aoi Tada","Titles":0},{"Id":2516,"Name":"Norio Wakamoto","Titles":0},{"Id":18998,"Name":"Tyrone Keogh","Titles":0},{"Id":18997,"Name":"Xu Qing","Titles":0}],"Countries":[{"Id":14,"Name":"China","Titles":0},{"Id":26,"Name":"South Africa","Titles":0},{"Id":2,"Name":"United States","Titles":0}],"Directors":[{"Id":2425,"Name":"Shinichiro Watanabe","Titles":0}],"Categories":[{"Id":1,"Name":"Action & Adventure","Titles":0},{"Id":1,"Name":"Anime Series","Titles":0},{"Id":1,"Name":"Crime","Titles":0},{"Id":1,"Name":"Drama, more","Titles":0}]},"movie_api":{"adult":false,"backdrop_path":"/gu9VOyEmCLQZ0yPweOY0zIOgV3.jpg","genre_ids":[28,878,53,9648],"id":470114,"original_language":"en","original_title":"Cowboy Bebop","overview":"An assassin seeks redemption after being given a second chance at life.","popularity":17.676,"poster_path":"/w0MXP33x1bq48TDC7IaNqQ8nxcc.jpg","release_date":"1998-10-26","title":"Cowboy Bebop","video":false,"vote_average":8.4,"vote_count":427}}'
+var bebop_json = '{"prof_api":{"Id":80208951,"Name":"Cowboy Bebop","DateAdded":"2018-04-07T00:00:00","Description":"In 2071, roughly fifty years after an accident with a hyperspace gateway made the Earth almost uninhabitable, humanity has colonized most of the rocky planets and moons of the Solar System. Amid a rising crime rate, the Inter Solar System Police (ISSP) set up a legalized contract system, in which registered bounty hunters (also referred to as Cowboys) chase criminals and bring them in alive in return for a reward.","Duration":"26 Sessions","ReleaseYear":1998,"Rating":{"Id":6,"Code":"TV-MA","Titles":0},"Type":{"Id":1,"Name":"Movie","Titles":0},"Actors":[{"Id":1491,"Name":"Kouichi Yamadera","Titles":0},{"Id":5350,"Name":"Unsho Ishizuka","Titles":0},{"Id":4104,"Name":"Megumi Hayashibara","Titles":0},{"Id":8053,"Name":"Aoi Tada","Titles":0},{"Id":2516,"Name":"Norio Wakamoto","Titles":0},{"Id":18998,"Name":"Tyrone Keogh","Titles":0},{"Id":18997,"Name":"Xu Qing","Titles":0}],"Countries":[{"Id":14,"Name":"Japan","Titles":0},{"Id":26,"Name":"United States"}],"Directors":[{"Id":2425,"Name":"Shinichiro Watanabe","Titles":0}],"Categories":[{"Id":1,"Name":"Action & Adventure","Titles":0},{"Id":1,"Name":"Anime Series","Titles":0},{"Id":1,"Name":"Crime","Titles":0},{"Id":1,"Name":"Drama, more","Titles":0}]},"movie_api":{"adult":false,"backdrop_path":"/gu9VOyEmCLQZ0yPweOY0zIOgV3.jpg","genre_ids":[28,878,53,9648],"id":470114,"original_language":"en","original_title":"Cowboy Bebop","overview":"An assassin seeks redemption after being given a second chance at life.","popularity":17.676,"poster_path":"/w0MXP33x1bq48TDC7IaNqQ8nxcc.jpg","release_date":"1998-10-26","title":"Cowboy Bebop","video":false,"vote_average":8.4,"vote_count":427}}'
 
 //Start here.
 $(document).ready(async function () {
@@ -190,8 +190,8 @@ function GetRandomItems(titles, num) {
     if (titles.length - h <= 0)
       break;
 
-    var title_random = titles[getRandomInt(0,titles.length)]; 
-    if (title_random != undefined && !result.includes(title_random)){
+    var title_random = titles[getRandomInt(0, titles.length)];
+    if (title_random != undefined && !result.includes(title_random)) {
       h++;
       result.push(title_random);
     }
@@ -286,6 +286,7 @@ function ModalOpen(tag) {
   //Gets the title thats being held in a script tag inside the title carousel item.
   var title = (JSON.parse(tag.getElementsByTagName('script')[0].innerHTML));
 
+  console.log(title)
   //Sets up the backdrop image.
   $("#modal-backdrop").attr("src", secure_base_url + '/w500' + title.movie_api.backdrop_path);
 
@@ -332,6 +333,24 @@ function ModalOpen(tag) {
   }
   _categories = _categories.trimEnd(',');
   $("#modal-categories").text(_categories);
+
+  //Sets up the countries. Max of 5 countries.
+  var _countries = "";
+
+  if (title.prof_api.Countries.length == 0)
+    _directors = "No countries";
+  for (a = 0; a < title.prof_api.Countries.length; a++) {
+    _countries = _countries + (title.prof_api.Countries[a].Name);
+    if (a != title.prof_api.Countries.length - 1)
+      _countries = _countries + ", ";
+
+    if (a >= 5) {
+      _countries = _countries + "more";
+      break;
+    }
+  }
+  _countries = _countries.trimEnd(',');
+  $("#modal-countries").text(_countries);
 
   //Sets up the directors. Max of 5 directors.
   var _directors = "";

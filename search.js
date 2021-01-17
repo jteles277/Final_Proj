@@ -205,7 +205,7 @@ This function will go through each item from the category and will see if it qua
 If it is qualified, then return it plus the poster / backdrop image path that will be used later.
 */
 async function GetAvailableTitles(titles) {
-    //Now, loops through each title.
+  //Now, loops through each title.
   for (i = 0; i < titles.length; i++) {
 
     //Gets the reference for the currently iterating title.
@@ -325,6 +325,7 @@ function ModalOpen(tag) {
   //Gets the title thats being held in a script tag inside the title carousel item.
   var title = (JSON.parse(tag.getElementsByTagName('script')[0].innerHTML));
 
+  console.log(title)
   //Sets up the backdrop image.
   $("#modal-backdrop").attr("src", secure_base_url + '/w500' + title.movie_api.backdrop_path);
 
@@ -369,9 +370,26 @@ function ModalOpen(tag) {
       break;
     }
   }
-  
   _categories = _categories.trimEnd(',');
   $("#modal-categories").text(_categories);
+
+  //Sets up the countries. Max of 5 countries.
+  var _countries = "";
+
+  if (title.prof_api.Countries.length == 0)
+    _directors = "No countries";
+  for (a = 0; a < title.prof_api.Countries.length; a++) {
+    _countries = _countries + (title.prof_api.Countries[a].Name);
+    if (a != title.prof_api.Countries.length - 1)
+      _countries = _countries + ", ";
+
+    if (a >= 5) {
+      _countries = _countries + "more";
+      break;
+    }
+  }
+  _countries = _countries.trimEnd(',');
+  $("#modal-countries").text(_countries);
 
   //Sets up the directors. Max of 5 directors.
   var _directors = "";
