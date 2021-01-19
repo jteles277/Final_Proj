@@ -207,7 +207,7 @@ user-select: none;
     display:block;
 }
 
-@media only screen and (max-height: 800px) {
+@media only screen and (max-height: 200px) {
     .hide-small {
         display: none;
     }
