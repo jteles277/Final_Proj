@@ -277,8 +277,14 @@ user-select: none;
   }
 
   /*----------------------------------SEARCH--------------------*/
+  #pagination_div{
+    padding: 10vh 0 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
   #parentGrid{
-    padding: 10vh 20px 20px 20px;
+    padding: 0 20px 20px 20px;
     display: grid;
     grid-template-columns: repeat(auto-fit, 250px);
     justify-content: center;

@@ -263,12 +263,15 @@ function SearchBar() {
 //This function is called when we want to search for all the movies in the DB.
 function OnlyMovies() {
   localStorage.setItem("searchInput", "Movies");
+  localStorage.setItem("currentPage", "1");
   window.location.replace("search.html");
 };
 
 //This function is called when we want to search for all the series in the DB.
 function OnlySeries() {
   localStorage.setItem("searchInput", "Series");
+  localStorage.setItem("currentPage", "1");
+
   window.location.replace("search.html");
 };
 

@@ -60,12 +60,17 @@ $(document).ready(async function () {
 });
 
 /*    SHOW MOVIES    */
+var pages = 0;
 async function ShowMovies() {
   //Gets a slice of 100 items from all the movies and creates it.
   console.log('Getting all movies...');
-  var composedUri = allMovies + "?page=1" + "&pagesize=1000";
+  var composedUri = allMovies + "?page="+ localStorage.getItem("currentPage") + "&pagesize=100";
 
   _ajax = await ajaxHelper(composedUri, 'GET');
+
+  //Setup pagination
+  pages = _ajax.TotalPages;
+  SetupPages(localStorage.getItem("currentPage"));
 
   //Shuffles the array so that it does not always display items in the same order.
   (shuffleArray(_ajax.Titles));
@@ -76,14 +81,112 @@ async function ShowMovies() {
 async function ShowSeries() {
   //Gets a slice of 100 items from all the series and creates it.
   console.log('Getting all series...');
-  var composedUri = allSeries + "?page=1" + "&pagesize=1000";
+  var composedUri = allSeries + "?page=1" + "&pagesize=100";
 
   _ajax = await ajaxHelper(composedUri, 'GET');
+
+  //Setup pagination
+  pages = _ajax.TotalPages;
+  SetupPages(localStorage.getItem("currentPage"));
 
   //Shuffles the array so that it does not always display items in the same order.
   (shuffleArray(_ajax.Titles));
 
   GetAvailableTitles(_ajax.Titles);
+}
+
+function SetupPages(current) {
+
+  while (pagination_div.firstChild) {
+    pagination_div.removeChild(pagination_div.firstChild);
+  }
+
+  var _start_page = current - 5;
+  if (_start_page < 0)
+    _start_page = 0;
+
+  if (_start_page > 0) {
+    //First
+    var _first = document.createElement("button");
+    _first.className = "btn btn-outline-light";
+    _first.innerHTML = "⇤";
+    _first.onclick = function(){PageHandler(this.innerHTML);};
+
+    pagination_div.appendChild(_first);
+  }
+
+  if (current > 1) {
+    //Prev
+    var _prev = document.createElement("button");
+    _prev.className = "btn btn-outline-light";
+    _prev.innerHTML = "←";
+    _prev.onclick = function(){PageHandler(this.innerHTML);};
+
+    pagination_div.appendChild(_prev);
+  }
+
+  for (t = _start_page; t < pages; t++) {
+    if (t >= _start_page + 9) {
+
+      //Next
+      var _next = document.createElement("button");
+      _next.className = "btn btn-outline-light";
+      _next.innerHTML = "→";
+      _next.onclick = function(){PageHandler(this.innerHTML);};
+
+      pagination_div.appendChild(_next);
+
+      //Last
+      var _last = document.createElement("button");
+      _last.className = "btn btn-outline-light";
+      _last.innerHTML = "⇥";
+      _last.onclick = function(){PageHandler(this.innerHTML);};
+
+      pagination_div.appendChild(_last);
+
+      break;
+    }
+    var _but = document.createElement("button");
+    if (t + 1 == current)
+      _but.className = "btn btn-light";
+    else
+      _but.className = "btn btn-outline-light";
+    _but.innerHTML = t + 1;
+
+    _but.onclick = function(){PageHandler(this.innerHTML);};
+
+
+    pagination_div.appendChild(_but);
+  }
+}
+
+function PageHandler(inner) {
+  if (inner === "→") {
+    localStorage.setItem("currentPage", parseInt(localStorage.getItem("currentPage")) + 1);
+    location.reload();
+    return;
+  }
+
+  if (inner === "⇥") {
+    localStorage.setItem("currentPage", pages);
+    location.reload();
+    return;
+  }
+
+  if (inner === "←") {
+    localStorage.setItem("currentPage", parseInt(localStorage.getItem("currentPage")) - 1);
+    location.reload();
+    return;
+  }
+
+  if (inner === "⇤") {
+    localStorage.setItem("currentPage", 1);
+    location.reload();
+    return;
+  }
+
+  localStorage.setItem("currentPage",inner);
+  location.reload();
 }
 
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
@@ -308,12 +411,15 @@ function SearchBar() {
 //This function is called when we want to search for all the movies in the DB.
 function OnlyMovies() {
   localStorage.setItem("searchInput", "Movies");
+  localStorage.setItem("currentPage", "1");
   window.location.replace("search.html");
 };
 
 //This function is called when we want to search for all the series in the DB.
 function OnlySeries() {
   localStorage.setItem("searchInput", "Series");
+  localStorage.setItem("currentPage", "1");
+
   window.location.replace("search.html");
 };
 
