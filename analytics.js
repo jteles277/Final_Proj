@@ -70,13 +70,17 @@ function drawChart() {
 }
 function drawChart2() {
 
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Work',     11],
-      ['Work',     11],
-    ]);
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Slices');
+
+    data.addRow(['Movies',2]);
+    data.addRow(['Shows',2]);
 
     var options = {
+        'width': 1100,
+        'height': 300,
         title: 'Movies vs Show',
         colors: ['red', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
         legendTextStyle: { color: '#141414' },
