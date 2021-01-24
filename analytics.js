@@ -13,6 +13,11 @@ $(document).ready(async function () {
 
     // Set a callback to run when the Google Visualization API is loaded.
     google.charts.setOnLoadCallback(drawChart);
+
+    google.charts.setOnLoadCallback(drawChart2);
+
+
+    
 });
 
 /*    GET CATEGORIES    */
@@ -43,15 +48,54 @@ function drawChart() {
     // Set chart options
     var options = {
         'title': 'Titles by category',
-        'width': 600,
+        'width': 1100,
         'height': 300,
         'is3D':true,
+        colors: ['red', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+
+        legendTextStyle: { color: '#141414' },
+        titleTextStyle: { color: 'white' },
+        vAxis: {
+            textStyle: { color: 'white' },
+          },
+        hAxis: {
+            textStyle: { color: 'white' },
+          },
+        backgroundColor: '#141414',
     };
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
     chart.draw(data, options);
 }
+function drawChart2() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Work',     11],
+      ['Work',     11],
+    ]);
+
+    var options = {
+        title: 'Movies vs Show',
+        colors: ['red', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
+        legendTextStyle: { color: '#141414' },
+        titleTextStyle: { color: 'white' },
+        vAxis: {
+            textStyle: { color: 'white' },
+          },
+        hAxis: {
+            textStyle: { color: 'white' },
+          },
+        backgroundColor: '#141414',
+        'is3D':true,
+
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
+  }
 
 //Internal function that makes it easier to make ajax fetches.
 function ajaxHelper(uri, method, data) {
