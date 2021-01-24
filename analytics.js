@@ -70,7 +70,7 @@ function drawChart() {
     // Create the data table.
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Topping');
-    data.addColumn('number', 'Slices');
+    data.addColumn('number', 'Titles');
 
     console.log(categories);
     for(i = 0;i < categories.length; i++){
@@ -104,7 +104,7 @@ function drawChart2() {
 
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Topping');
-    data.addColumn('number', 'Slices');
+    data.addColumn('number', 'Titles');
 
     data.addRow(['Movies',numOfMovies]);
     data.addRow(['Series',numOfSeries]);
