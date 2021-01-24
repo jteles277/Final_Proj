@@ -1,12 +1,18 @@
 
 
 var categoryUri = 'http://192.168.160.58/netflix/api/Categories/';
+var allMovies = 'http://192.168.160.58/netflix/api/Movies';
+var allSeries = 'http://192.168.160.58/netflix/api/Series';
 
 var categories = [];
 
-$(document).ready(async function () {
+var numOfMovies = 0;
+var numOfSeries = 0;
 
+$(document).ready(async function () {
     categories = await GetCategories();
+    numOfMovies = await GetMovies();
+    numOfSeries = await GetSeries();
 
     // Load the Visualization API and the corechart package.
     google.charts.load('current', { 'packages': ['corechart'] });
@@ -16,6 +22,8 @@ $(document).ready(async function () {
 
     google.charts.setOnLoadCallback(drawChart2);
 
+    loading.style.display = "none";
+    table_content.style.display = "table";
 
     
 });
@@ -28,6 +36,30 @@ async function GetCategories() {
     _ajax = await ajaxHelper(categoryUri, 'GET');
 
     return _ajax.Categories;
+}
+
+/*    GET MOVIES    */
+async function GetMovies() {
+
+    console.log('Getting categories...');
+
+    var composedUri = allMovies + "?page=1" + "&pagesize=100000";
+
+    _ajax = await ajaxHelper(composedUri, 'GET');
+
+    return _ajax.TotalTitles;
+}
+
+/*    GET SERIES    */
+async function GetSeries() {
+
+    console.log('Getting categories...');
+
+    var composedUri = allSeries + "?page=1" + "&pagesize=100000";
+
+    _ajax = await ajaxHelper(composedUri, 'GET');
+
+    return _ajax.TotalTitles;
 }
 
 // Callback that creates and populates a data table,
@@ -49,10 +81,9 @@ function drawChart() {
     var options = {
         'title': 'Titles by category',
         'width': 1100,
-        'height': 300,
+        'height': 1500,
         'is3D':true,
         colors: ['red', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
-
         legendTextStyle: { color: '#141414' },
         titleTextStyle: { color: 'white' },
         vAxis: {
@@ -75,13 +106,13 @@ function drawChart2() {
     data.addColumn('string', 'Topping');
     data.addColumn('number', 'Slices');
 
-    data.addRow(['Movies',2]);
-    data.addRow(['Shows',2]);
+    data.addRow(['Movies',numOfMovies]);
+    data.addRow(['Series',numOfSeries]);
 
     var options = {
         'width': 1100,
         'height': 300,
-        title: 'Movies vs Show',
+        title: 'Movies vs Series',
         colors: ['red', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
         legendTextStyle: { color: '#141414' },
         titleTextStyle: { color: 'white' },

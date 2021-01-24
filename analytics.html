@@ -19,7 +19,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="analytics.js"></script>
     <!-- HEADER -->
-    <div class="header sticky" style="background-color: #141414;"> 
+    <div class="header sticky" style="background-color: #141414;">
         <!-- Logo -->
         <img src="images/Netflix_Logo_PMS.png" height="50" alt="Netflix logo">
 
@@ -33,19 +33,21 @@
         <div class="header-right">
             <div id="search-bar">
                 <form autocomplete="on" onsubmit="SearchBar(); return false;">
-                    <input autocomplete="off" id="search" onclick="Search()" type="text" placeholder="Titles, people, places and categories" spellcheck="false">
+                    <input autocomplete="off" id="search" onclick="Search()" type="text"
+                        placeholder="Titles, people, places and categories" spellcheck="false">
                     <img id="lupa" width="20px" src="images/search.png"></img>
                 </form>
             </div>
         </div>
-        </div>
+    </div>
 
     <!--     BODY (VIDEO AND TITLES -->
-    <table style="width: 100%; align-self: center;" align="center">
+    <table id="table_content" style="display: none; width: 100%; align-self: center;" align="center">
 
         <tr align="center">
             <td>
-                <h1  style=" margin-top: 20vh; "><span style="color:red">1800</span> Titles</h1>
+                <h2 style=" margin-top: 20vh; color: white;"><span style="color:red">1800</span> titles on the database!
+                </h2>
                 <hr style="border-top: 2px solid darkgrey; width:50%; color:darkgrey">
             </td>
         </tr>
@@ -63,17 +65,8 @@
 
         <tr align="center">
             <td>
-                <h1><span style="color:red">15</span> Categories</h1>
+                <h2 style="color: white;"><span style="color:red">15</span> categories registered!</h2>
                 <hr style="border-top: 2px solid darkgrey; width:50%; color:darkgrey">
-            </td>
-        </tr>
- 
-
-        
-        <tr align="center">
-            <td>
-                <div  align="center" id="piechart" style="padding-bottom: 50px; margin-top: 10vh; margin-left: 18%;"></div>
-                <hr style="border-top: 2px solid darkgrey; width:50%; color:darkgrey"></td>
             </td>
         </tr>
 
@@ -81,20 +74,29 @@
 
         <tr align="center">
             <td>
-                <h1><span style="color:red">450</span> Actors</h1>
+                <div align="center" id="piechart" style="padding-bottom: 50px; margin-top: 10vh; margin-left: 18%;">
+                </div>
+                <hr style="border-top: 2px solid darkgrey; width:50%; color:darkgrey">
+            </td>
+            </td>
+        </tr>
+
+
+
+        <tr align="center">
+            <td>
+                <h2 style="color: white;"><span style="color:red">450</span> actors on the database!</h2>
                 <hr style="border-top: 2px solid darkgrey; width:50%; color:darkgrey">
             </td>
         </tr>
         <tr align="center">
             <td>
-                <h1><span style="color:red">121</span> Directors</h1>
+                <h2 style="color: white;"><span style="color:red">121</span> directors registered!</h2>
                 <hr style="border-top: 2px solid darkgrey; width:50%; color:darkgrey">
             </td>
         </tr>
-        
-        
     </table>
-    <div id="loading" style="display: inline;" class="loading" data-title=".dot-flashing">
+    <div id="loading" style="display: inline; position: absolute; left: 50%; top: 50%;" class="loading" data-title=".dot-flashing">
         <div>
             <div class="dot-flashing"></div>
         </div>
